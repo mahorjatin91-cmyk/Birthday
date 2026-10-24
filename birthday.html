@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Happy Birthday 🎂</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#2a1038;--bg2:#4a1a5c;--gold:#ffb627;--rose:#ff5c8a;--mint:#5ee6c0;--text:#fff4e6}
+*{box-sizing:border-box;margin:0}
+body{font-family:'Baloo 2',sans-serif;color:var(--text);min-height:100vh;text-align:center;overflow-x:hidden;
+background:radial-gradient(circle at 50% 15%,var(--bg2),var(--bg) 70%) fixed}
+#fx{position:fixed;inset:0;pointer-events:none;z-index:50}
+#sky{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.balloon{position:absolute;bottom:-120px;width:46px;height:58px;border-radius:50% 50% 48% 48%;opacity:.85;animation:rise linear forwards}
+.balloon::after{content:"";position:absolute;left:50%;top:100%;width:1px;height:50px;background:#ffffff66}
+@keyframes rise{to{transform:translateY(-120vh) translateX(var(--dx))}}
+
+/* intro */
+#intro{position:fixed;inset:0;z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
+background:radial-gradient(circle at 50% 40%,var(--bg2),var(--bg) 75%);transition:opacity .6s}
+#intro.hide{opacity:0;pointer-events:none}
+.gift{font-size:110px;line-height:1;background:none;border:0;cursor:pointer;animation:wiggle 1.6s ease-in-out infinite}
+@keyframes wiggle{0%,100%{transform:rotate(0) scale(1)}20%{transform:rotate(-8deg) scale(1.08)}40%{transform:rotate(8deg) scale(1.08)}60%{transform:rotate(0) scale(1)}}
+#intro p{font-size:20px;padding:0 24px}
+.tap{font-size:15px;color:var(--gold)}
+
+/* main */
+#main{position:relative;z-index:5;display:none;max-width:480px;margin:0 auto;padding:36px 20px 60px}
+#main.show{display:block;animation:fade 1s}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+h1{font-family:'Pacifico',cursive;font-weight:400;font-size:46px;line-height:1.15;color:var(--gold);text-shadow:0 3px 18px #ffb62766}
+.name{font-family:'Pacifico',cursive;font-size:40px;color:var(--rose);margin-top:6px;text-shadow:0 3px 18px #ff5c8a66}
+#typed{min-height:92px;margin:22px 0 4px;font-size:19px;line-height:1.6}
+.cursor{display:inline-block;width:2px;height:1em;background:var(--gold);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* cake */
+.cake{position:relative;width:200px;height:175px;margin:34px auto 8px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.l1,.l2{position:absolute;left:0;border-radius:14px 14px 10px 10px}
+.l1{bottom:0;width:200px;height:62px;background:var(--rose);box-shadow:inset 0 -8px 0 #0002}
+.l2{bottom:62px;left:25px;width:150px;height:50px;background:var(--gold);box-shadow:inset 0 -8px 0 #0002}
+.l2::before{content:"";position:absolute;left:0;right:0;top:0;height:12px;border-radius:14px 14px 0 0;background:#fff8}
+.candle{position:absolute;bottom:112px;width:9px;height:34px;border-radius:3px;background:repeating-linear-gradient(135deg,var(--mint) 0 6px,#fff 6px 12px)}
+.flame{position:absolute;left:50%;top:-20px;width:12px;height:18px;margin-left:-6px;border-radius:50% 50% 50% 50%/65% 65% 35% 35%;
+background:radial-gradient(circle at 50% 70%,#fff6c4,var(--gold) 60%,#ff7a00);box-shadow:0 0 16px 4px #ffb627aa;animation:flick .25s infinite alternate}
+@keyframes flick{from{transform:scale(1,1) rotate(-3deg)}to{transform:scale(.9,1.12) rotate(3deg)}}
+.cake.off .flame{display:none}
+.hint{font-size:15px;color:var(--gold);min-height:24px}
+
+/* wishes */
+#wishes{margin-top:26px;display:none;text-align:left}
+#wishes.show{display:block}
+.wish{margin:12px 0;padding:14px 18px;border-left:5px solid var(--rose);background:#ffffff14;border-radius:0 16px 16px 0;
+font-size:18px;line-height:1.5;opacity:0;transform:translateX(-24px);transition:all .6s}
+.wish:nth-child(even){border-left-color:var(--gold)}
+.wish.in{opacity:1;transform:none}
+#sign{margin-top:26px;font-family:'Pacifico',cursive;font-size:24px;color:var(--mint);opacity:0;transition:opacity 1.2s}
+#sign.in{opacity:1}
+#letterBtn{display:none;margin:26px auto 0;padding:12px 24px;border:0;border-radius:30px;background:var(--rose);color:#fff;font:700 17px 'Baloo 2',sans-serif;cursor:pointer;box-shadow:0 6px 20px #ff5c8a66}
+#letterBtn.show{display:block}
+#letter{display:none;margin-top:22px;padding:22px 20px;background:#fff4e6;color:#3a1a2e;border-radius:14px;text-align:left;font-size:18px;line-height:1.65;box-shadow:0 10px 30px #0006}
+#letter.show{display:block;animation:fade 1s}
+#music{position:fixed;top:12px;right:12px;z-index:60;width:42px;height:42px;border:0;border-radius:50%;background:#ffffff26;color:#fff;font-size:20px;cursor:pointer;display:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<canvas id="fx"></canvas>
+<div id="sky"></div>
+<audio id="song" loop preload="auto"></audio>
+<button id="music" aria-label="Music on/off">🔊</button>
+
+<div id="intro">
+  <button class="gift" id="giftBtn" aria-label="Gift kholo">🎁</button>
+  <p>Aaj ka din bahut khaas hai...<br>Tumhare liye ek surprise hai!</p>
+  <span class="tap">👆 Gift pe tap karo</span>
+</div>
+
+<div id="main">
+  <h1>Happy Birthday</h1>
+  <div class="name" id="nameEl"></div>
+  <div id="typed"></div>
+
+  <div class="cake" id="cake" role="button" aria-label="Candles bujhao">
+    <div class="candle" style="left:68px"><span class="flame"></span></div>
+    <div class="candle" style="left:95px"><span class="flame"></span></div>
+    <div class="candle" style="left:122px"><span class="flame"></span></div>
+    <div class="l2"></div>
+    <div class="l1"></div>
+  </div>
+  <div class="hint" id="hint">🎂 Candles pe tap karo, wish maango aur bujha do!</div>
+
+  <div id="wishes"></div>
+  <div id="sign"></div>
+  <button id="letterBtn">💌 Ek message hai tumhare liye</button>
+  <div id="letter"></div>
+</div>
+
+<script>
+/* ====== YAHAN APNI DETAILS BADLO ====== */
+const NAME = "Nandani";        // birthday girl ka naam
+const FROM = "Jatin";          // tumhara naam
+const SONG = "song.mp3";       // gaane ki file ka naam (isi folder me rakhna)
+
+const INTRO_TEXT = "Aaj ka din sirf tumhara hai! 🎉\nTumhari smile jaisa pyara ho tumhara har din. ✨";
+
+const WISHES = [
+  "🌸 Tumhari zindagi me hamesha khushiyon ki baarish hoti rahe.",
+  "🌟 Tumhare saare sapne pure ho, aur har kadam pe kamyabi mile.",
+  "😊 Tumhari muskurahat hamesha aisi hi chamakti rahe.",
+  "💖 Ye saal tumhare liye ab tak ka sabse accha saal ho.",
+  "🎁 Janamdin bahut bahut mubarak ho, Nandani!"
+];
+
+const LETTER = "Nandani,\n\nMujhe pata hai maine tumhe bahut hurt kiya hai, aur uska mujhe dil se afsos hai. Ye baat kehna mere liye aasan nahi tha, isliye tumhare khaas din pe sach me dil se likh raha hu.\n\nAgar main maafi ke layak hu, to ho sake to mujhe maaf kar dena. Aur agar tum chaho, to hum ek nayi shuruaat kar sakte hain, bilkul waise hi jaise hum pehli baar mile the.\n\nTum jo bhi faisla lo, main uski izzat karunga. Bas itna jaan lena ki tumhari khushi mere liye sabse zyada matter karti hai.\n\n— Jatin";
+/* ====================================== */
+
+const song = document.getElementById('song'), musicBtn = document.getElementById('music');
+song.src = SONG;
+musicBtn.addEventListener('click', () => {
+  if(song.paused){song.play(); musicBtn.textContent = '🔊'} else {song.pause(); musicBtn.textContent = '🔇'}
+});
+
+document.getElementById('nameEl').textContent = NAME + " 🎂";
+document.getElementById('sign').textContent = "— " + FROM + " ❤️";
+
+/* ---------- confetti ---------- */
+const cv = document.getElementById('fx'), cx = cv.getContext('2d');
+function size(){cv.width = innerWidth; cv.height = innerHeight}
+size(); addEventListener('resize', size);
+const colors = ['#ffb627','#ff5c8a','#5ee6c0','#ffffff','#8fa8ff'];
+const emojis = ['❤️','✨','🎉','🌸'];
+let parts = [], running = false;
+
+function burst(n, x, y){
+  for(let i=0;i<n;i++){
+    const a = Math.random()*Math.PI*2, s = 4 + Math.random()*9;
+    parts.push({x:x, y:y, vx:Math.cos(a)*s, vy:Math.sin(a)*s - 6,
+      w:6+Math.random()*6, h:8+Math.random()*8, r:Math.random()*6, vr:(Math.random()-.5)*.4,
+      c:colors[i%colors.length], e: Math.random()<.18 ? emojis[i%emojis.length] : null, life:0});
+  }
+  if(!running){running = true; loop()}
+}
+function loop(){
+  cx.clearRect(0,0,cv.width,cv.height);
+  parts = parts.filter(p => p.y < cv.height + 30 && p.life < 260);
+  for(const p of parts){
+    p.vy += .22; p.vx *= .99; p.x += p.vx; p.y += p.vy; p.r += p.vr; p.life++;
+    cx.save(); cx.translate(p.x,p.y); cx.rotate(p.r);
+    if(p.e){cx.font = '20px serif'; cx.fillText(p.e,0,0)}
+    else{cx.fillStyle = p.c; cx.fillRect(-p.w/2,-p.h/2,p.w,p.h)}
+    cx.restore();
+  }
+  if(parts.length) requestAnimationFrame(loop); else {running = false; cx.clearRect(0,0,cv.width,cv.height)}
+}
+
+/* ---------- balloons ---------- */
+function balloon(){
+  const b = document.createElement('div');
+  b.className = 'balloon';
+  b.style.left = Math.random()*92 + 'vw';
+  b.style.background = colors[Math.floor(Math.random()*3)];
+  b.style.setProperty('--dx', (Math.random()*80-40) + 'px');
+  b.style.animationDuration = (9 + Math.random()*7) + 's';
+  document.getElementById('sky').appendChild(b);
+  setTimeout(() => b.remove(), 17000);
+}
+
+/* ---------- typewriter ---------- */
+function typeText(text, el, done, speed){
+  let i = 0;
+  const cur = '<span class="cursor"></span>';
+  (function step(){
+    el.innerHTML = text.slice(0,i).replace(/\n/g,'<br>') + cur;
+    if(i++ < text.length) setTimeout(step, speed || 55);
+    else {el.innerHTML = text.replace(/\n/g,'<br>'); done && done()}
+  })();
+}
+
+/* ---------- flow ---------- */
+document.getElementById('giftBtn').addEventListener('click', () => {
+  document.getElementById('intro').classList.add('hide');
+  document.getElementById('main').classList.add('show');
+  song.play().then(() => {musicBtn.style.display = 'block'}).catch(() => {});
+  burst(140, innerWidth/2, innerHeight/2);
+  for(let i=0;i<6;i++) setTimeout(balloon, i*400);
+  setInterval(balloon, 1800);
+  typeText(INTRO_TEXT, document.getElementById('typed'));
+});
+
+let blown = false;
+document.getElementById('cake').addEventListener('click', function(){
+  if(blown) return;
+  blown = true;
+  this.classList.add('off');
+  document.getElementById('hint').textContent = "Wish pakki! Ab dekho tumhare liye kya hai 💝";
+  burst(120, innerWidth*0.25, innerHeight*0.6);
+  burst(120, innerWidth*0.75, innerHeight*0.6);
+  const box = document.getElementById('wishes');
+  box.classList.add('show');
+  WISHES.forEach((t, i) => {
+    const d = document.createElement('div');
+    d.className = 'wish'; d.textContent = t;
+    box.appendChild(d);
+    setTimeout(() => {d.classList.add('in'); d.scrollIntoView({behavior:'smooth', block:'center'})}, 900 + i*1400);
+  });
+  setTimeout(() => {
+    document.getElementById('sign').classList.add('in');
+    document.getElementById('letterBtn').classList.add('show');
+    burst(200, innerWidth/2, innerHeight*0.5);
+  }, 900 + WISHES.length*1400);
+});
+
+document.getElementById('letterBtn').addEventListener('click', function(){
+  this.style.display = 'none';
+  const l = document.getElementById('letter');
+  l.classList.add('show');
+  l.scrollIntoView({behavior:'smooth', block:'center'});
+  typeText(LETTER, l, null, 22);
+});
+</script>
+</body>
+</html>
