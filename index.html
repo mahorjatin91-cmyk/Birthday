@@ -173,7 +173,7 @@ function typeText(text, el, done, speed){
   const cur = '<span class="cursor"></span>';
   (function step(){
     el.innerHTML = text.slice(0,i).replace(/\n/g,'<br>') + cur;
-    if(i++ < text.length) setTimeout(step, speed || 55);
+    if(i++ < text.length) setTimeout(step, speed || 90);
     else {el.innerHTML = text.replace(/\n/g,'<br>'); done && done()}
   })();
 }
@@ -217,7 +217,7 @@ document.getElementById('letterBtn').addEventListener('click', function(){
   const l = document.getElementById('letter');
   l.classList.add('show');
   l.scrollIntoView({behavior:'smooth', block:'center'});
-  typeText(LETTER, l, null, 22);
+  typeText(LETTER, l, null, 45);
 });
 </script>
 </body>
